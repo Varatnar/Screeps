@@ -25,16 +25,26 @@ var roleHarvester = {
                 }
             }
             if (targets == "") {
-                creep.memory.isBusy = true;
-                targets = creep.room.find(FIND_CONSTRUCTION_SITES);
-                if(targets.length) {
-                    if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
+                targets = creep.room.find(FIND_MY_STRUCTURES, {
+                    filter: (structure) => structure.structureType == STRUCTURE_TOWER
+                });
+                if(targets.length > 0) {
+                    if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                     }
                 }
-                if(targets == "") {
-                    if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
+                if (targets == "") {
+                    creep.memory.isBusy = true;
+                    targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+                    if (targets.length) {
+                        if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                        }
+                    }
+                    if (targets == "") {
+                        if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
+                        }
                     }
                 }
             }

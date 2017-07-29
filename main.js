@@ -49,15 +49,25 @@ module.exports.loop = function () {
         mainBase.createCreep([WORK, CARRY, MOVE], null, {role: 'builder'});
         console.log("New Builder built");
     }
-    
+
     // Repairer handler
     var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
     if (repairers.length < repairerCount) {
         mainBase.createCreep([WORK, CARRY, MOVE], null, {role: 'repairer'});
         console.log("New Repairer built");
     }
-    
-    
+
+    var towers = mainBase.room.find(FIND_MY_STRUCTURES, {
+        filter: (structure) => structure.structureType == STRUCTURE_TOWER
+    });
+
+    for (let tower of towers) {
+        var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        if (target != undefined) {
+            tower.attack(target);
+        }
+    }
+
     // Main Task assignation
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
@@ -65,15 +75,15 @@ module.exports.loop = function () {
         if (creep.memory.role == 'harvester') {
             harvesterController.run(creep, report);
         }
-        
+
         if (creep.memory.role == 'upgrader') {
             upgraderController.run(creep, report);
         }
-        
+
         if (creep.memory.role == 'builder') {
             builderController.run(creep, report);
         }
-        
+
         if (creep.memory.role == 'repairer') {
             repairerController.run(creep, report);
         }
