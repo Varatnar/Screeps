@@ -12,11 +12,6 @@ module.exports = {
 
 
     // ROLES - JOBS
-    ROLE_HARVESTER: 1,
-    ROLE_BUILDER: 2,
-    ROLE_REPAIRER: 3,
-    ROLE_UPGRADER: 4,
-
     ROLES: {
         HARVESTER: 1,
         BUILDER: 2,
