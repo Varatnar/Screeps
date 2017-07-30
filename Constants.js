@@ -15,5 +15,12 @@ module.exports = {
     ROLE_HARVESTER: 1,
     ROLE_BUILDER: 2,
     ROLE_REPAIRER: 3,
-    ROLE_UPGRADER: 4
+    ROLE_UPGRADER: 4,
+
+    ROLES: {
+        HARVESTER: 1,
+        BUILDER: 2,
+        REPAIRER: 3,
+        UPGRADER: 4
+    }
 };
