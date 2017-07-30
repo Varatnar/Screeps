@@ -10,6 +10,7 @@ var mainBase = Game.spawns['Erhka'];
 // Prototype extensions
 require('Tasks')();
 require('BehaviorHandler')();
+require('SpawningController')();
 
 // Constants
 let cst = require('Constants');
@@ -20,6 +21,7 @@ module.exports.loop = function () {
     // TESTING LINES START
 
     let report = new Report();
+    mainBase.spawnCreeps();
 
     // TESTING LINES END
 
@@ -27,6 +29,8 @@ module.exports.loop = function () {
     var upgradersCount = 1;
     var buildersCount = 1;
     var repairerCount = 1;
+
+    let customCreep = 0;
 
     // Upgrader handler
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
@@ -55,6 +59,13 @@ module.exports.loop = function () {
     if (repairers.length < repairerCount) {
         mainBase.createCreep([WORK, CARRY, MOVE], null, {role: 'repairer'});
         console.log("New Repairer built");
+    }
+
+    // Custom Harvester
+    let cHarvester = _.filter(Game.creeps, (c) => c.memory.role == cst.ROLE_HARVESTER);
+    if(cHarvester.length < customCreep) {
+        mainBase.createCreep([WORK, CARRY, MOVE], null, {role: cst.ROLE_HARVESTER});
+        console.log("building custom creep");
     }
 
     var towers = mainBase.room.find(FIND_MY_STRUCTURES, {
