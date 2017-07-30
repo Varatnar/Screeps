@@ -1,11 +1,21 @@
-module.exports = {
-    controlSpawnOfWorker: function() {
-        let tempNumberOfCustomSpawn = 1;
+let RoleBaseDefinition = require('RoleBaseDefinition')
+let cst = require('Constants');
 
-        var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
+module.exports = function () {
 
-        if (this < tempNumberOfCustomSpawn) {
+    Spawn.prototype.spawnCreeps = function() {
+        let self = this;
+
+        let ratio;
+        for (let job in cst.ROLES) {
+            ratio = RoleBaseDefinition.getPartRatioForJob(cst.ROLES[job]);
 
         }
+        //self.createCreep(body, null, null)
+    };
+
+    function createPartArray(energy, ratio) {
+
     }
+
 };
