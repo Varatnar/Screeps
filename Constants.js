@@ -13,9 +13,18 @@ module.exports = {
 
     // ROLES - JOBS
     ROLES: {
-        HARVESTER: 1,
-        BUILDER: 2,
-        REPAIRER: 3,
-        UPGRADER: 4
+        HARVESTER: 'harvester',
+        BUILDER: 'builder',
+        REPAIRER: 'repairer',
+        UPGRADER: 'upgrader'
+    },
+
+    SPAWN_PERCENTAGE_OF_TOTAL_ENERGY: 60,
+
+    QUANTITY: {
+        HARVESTER: 6,
+        BUILDER: 1,
+        REPAIRER: 1,
+        UPGRADER: 1
     }
 };

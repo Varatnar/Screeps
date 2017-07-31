@@ -14,7 +14,7 @@ module.exports = function () {
     Creep.prototype.act = function () {
         let self = this;
 
-        if(self.memory.role == cst.ROLE_HARVESTER) {
+        if(self.memory.role == cst.ROLES.HARVESTER) {
             self.say("!!");
             if(self.memory.task == undefined) {
                 self.memory.task = cst.STATE_HARVESTING_SOURCE;
