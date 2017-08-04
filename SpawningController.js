@@ -19,7 +19,7 @@ module.exports = function () {
         console.log("=== spawnCreeps ===");
 
         if(energy == undefined) {
-            energy = 300; //todo hardcoding energy (has to be changed)
+            energy = 800; //todo hardcoding energy (has to be changed)
         }
 
         for (let job in cst.ROLES) {
@@ -34,8 +34,18 @@ module.exports = function () {
         //self.createCreep(body, null, null)
     };
 
-    Spawn.prototype.spawnNewCreepWithJob = function(job) {
-        let template = acquireTemplateObjectForJob(job);
+    Spawn.prototype.spawnNewCreepWithJob = function(job, energy) {
+        let self = this;
+
+        if (cst.ROLES[job] == cst.ROLES.HARVESTER) {
+            console.log("in spawning a :"+job);
+            let template = acquireTemplateObjectForJob(job);
+            let body = createPartArray(template.costRatio, energy);
+
+            console.log(JSON.stringify(body));
+
+            self.createCreep(body, null, {role : cst.ROLES[job]})
+        }
 
     };
 
@@ -50,7 +60,7 @@ module.exports = function () {
         let creepRoleQuantity = (_.filter(Game.creeps, (c) => c.memory.role == cst.ROLES[job])).length;
         console.log(job + " : " + creepRoleQuantity + "/"+cst.QUANTITY[job]);
 
-        return (creepRoleQuantity < cst.QUANTITY[job]);
+        return (creepRoleQuantity < (cst.QUANTITY[job]));
     };
 
     let acquireTemplateObjectForJob = function (job) {
@@ -70,8 +80,16 @@ module.exports = function () {
 
     };
 
-    function createPartArray(energy, ratio) {
+    let createPartArray = function(partRatio, energy) {
+        let partCounts = Utils.getNumberOfPartForGivenEnergySupply(partRatio, energy);
+        let partArray = [];
+        for(let part in partCounts) {
+            console.log(partCounts[part]);
+            for(let i = 0; i < partCounts[part]; i++)
+            partArray.push(part)
+        }
 
+        return partArray;
     }
 
 };

@@ -22,7 +22,7 @@ module.exports = {
     SPAWN_PERCENTAGE_OF_TOTAL_ENERGY: 60,
 
     QUANTITY: {
-        HARVESTER: 6,
+        HARVESTER: 4,
         BUILDER: 1,
         REPAIRER: 1,
         UPGRADER: 1

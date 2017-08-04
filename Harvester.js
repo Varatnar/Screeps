@@ -6,9 +6,9 @@ const Harvester = function () {
     this.role = cst.ROLES.HARVESTER;
     // Human readable (cost ratio is hard to evaluate
     this.partRatio = {
-        work: 40,
-        carry: 20,
-        move: 40
+        work: 35,
+        carry: 30,
+        move: 35
     };
     // Cost ratio, to be used when finding out size of creeps
     this.costRatio = Utils.convertToEnergyCostRatio(this.partRatio);

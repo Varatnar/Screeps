@@ -5,7 +5,7 @@ let Utils = {};
 /**
  * Convert a part ratio into a cost ratio
  *
- * @param ratio The part ratio of the entity
+ * @param {{}}ratio The part ratio of the entity
  * @returns {{key:number}} Cost ratio as float in a dictionary
  */
 Utils.convertToEnergyCostRatio = function (ratio) {
@@ -36,7 +36,7 @@ Utils.convertToEnergyCostRatio = function (ratio) {
  * @param {{}}ratio   Dictionary with the % of the total cost each [key] should try to use
  * @returns {{}}      Dictionary with the # instance of each part
  */
-Utils.getNumberOfPartForGivenEnergySupply = function (energy, ratio) {
+Utils.getNumberOfPartForGivenEnergySupply = function (ratio, energy) {
     let totalCost = 0;
     let partQuantity = {};
 
